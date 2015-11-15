@@ -1,0 +1,22 @@
+<div class="footer-content">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <p>
+        <small>
+          Built by <a href="https://twitter.com/danpalmer">@danpalmer</a> at the 2nd Mondo Hackathon.
+        </small>
+      </p>
+    </div>
+    {% if request.user.is_authenticated() %}
+      <div class="col-xs-12 col-sm-6 text-right">
+        <form method="POST" action="{{ url("accounts:logout") }}">
+          {{ csrf_input }}
+          <button
+            type="submit"
+            class="btn btn-sm btn-link"
+          >Logout</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+</div>

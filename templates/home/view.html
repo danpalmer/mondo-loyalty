@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block body_container %}
+  <div class="row home-content">
+    <div class="col-md-6 col-sm-12">
+      <p class="lead">
+        Track your points balance from loyalty cards like Nectar and Sparks, right in your Mondo account.
+      </p>
+      <a href="{{ url("accounts:login") }}" class="btn btn-primary">
+        Login with Mondo
+      </a>
+    </div>
+  </div>
+{% endblock %}

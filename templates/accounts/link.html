@@ -1,0 +1,80 @@
+{% extends "base/base.html" %}
+
+{% block body_classes %}{{ super() }} f_link_scheme{% endblock %}
+
+{% block body_container %}
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="page-header">
+        <h3>Link a loyalty account</h3>
+      </div>
+      <form method="POST">
+        {{ csrf_input }}
+
+        <div class="form-group">
+          <label for="{{ form.account.id_for_label }}">
+            Account
+          </label>
+          <select
+            name="{{ form.account.html_name }}"
+            id="{{ form.account.id_for_label }}"
+            class="form-control"
+          >
+            {% for value, label in form.fields.account.choices %}
+              <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.scheme.id_for_label }}">
+            Scheme
+          </label>
+          <select
+            name="{{ form.scheme.html_name }}"
+            id="{{ form.scheme.id_for_label }}"
+            class="form-control js-scheme-select"
+          >
+            <option value="">---------</option>
+            {% for option in enums.schemes.SchemeEnum %}
+              <option
+                value="{{ option.value }}"
+                data-username-field="{{ option.username_field }}"
+                data-password-field="{{ option.password_field }}"
+              >{{ option.display }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.username.id_for_label }}">
+            Username
+          </label>
+          <input
+            type="text"
+            name="{{ form.username.html_name }}"
+            id="{{ form.username.id_for_label }}"
+            class="form-control js-username-field"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.password.id_for_label }}">
+            Password
+          </label>
+          <input
+            type="password"
+            name="{{ form.password.html_name }}"
+            id="{{ form.password.id_for_label }}"
+            class="form-control js-password-field"
+          >
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-success"
+        >Add</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base/base.html" %}
+
+{% block body_container %}
+  <div class="row home-content">
+    <div class="col-md-6 col-sm-12">
+      <p class="lead">
+        Login with Mondo
+      </p>
+      <form method="POST">
+        {{ csrf_input }}
+
+        <div class="form-group">
+          <label for="{{ form.username.id_for_label }}">
+            Email
+          </label>
+          <input
+            type="text"
+            name="{{ form.username.html_name }}"
+            id="{{ form.username.id_for_label }}"
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.password.id_for_label }}">
+            Password
+          </label>
+          <input
+            type="password"
+            name="{{ form.password.html_name }}"
+            id="{{ form.password.id_for_label }}"
+            class="form-control"
+          >
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-success"
+        >Login</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

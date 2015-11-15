@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="{{ static("js/jquery-2.1.1.js") }}" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="{{ static("css/bootstrap.css") }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ static("css/fonts.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ static("css/base.css") }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+  <body class="{% block body_classes %}{% endblock %}">
+    {% block nav %}
+      {% include "base/_navigation.html" %}
+    {% endblock %}
+    {% block body %}
+      <div class="container navbar-offset">
+        {% block body_container %}
+        {% endblock %}
+      </div>
+    {% endblock %}
+    {% block footer %}
+      <footer>
+        <div class="container">
+          {% block footer_container %}
+            {% include "base/_footer.html" %}
+          {% endblock %}
+        </div>
+      </footer>
+    {% endblock %}
+    {% include "base/_analytics.html" %}
+    {% block scripts %}
+      <script type="text/javascript" src="{{ static("js/bootstrap.js") }}"></script>
+      <script type="text/javascript" src="{{ static("js/script.js") }}"></script>
+    {% endblock %}
+  </body>
+</html>

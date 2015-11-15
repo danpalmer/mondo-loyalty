@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block body_classes %}{{ super() }} f_link_scheme{% endblock %}
+
+{% block body_container %}
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="page-header">
+        <h3>Un-link loyalty account</h3>
+      </div>
+      <p>
+        Are you sure you want to unlink this {{ scheme.scheme.display }}
+        account from the Mondo account "{{ scheme.account.description }}"?
+      </p>
+      <form method="POST">
+        {{ csrf_input }}
+        <button
+          type="submit"
+          class="btn btn-danger"
+        >Yes, unlink</button>
+        <a
+          href="{{ url("accounts:dashboard") }}"
+          class="btn btn-link"
+        >No, go back</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

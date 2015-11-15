@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+
+{% block body_container %}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-header">
+        <h3>Schemes <a href="{{ url("accounts:link-scheme") }}">&plus;</a></h3>
+      </div>
+      {% if schemes %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Scheme</th>
+              <th>Balance</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for scheme in schemes %}
+              <tr class="{% if scheme.erroring %}danger{% endif %}">
+                <td>{{ scheme.account.description }}</td>
+                <td>{{ scheme.scheme.display }}</td>
+                <td>{{ scheme.balance_for_display() }}</td>
+                <td><a href="{{ url("accounts:unlink-scheme", scheme.pk) }}">&times;</a></td>
+              </tr>
+              {% if scheme.erroring %}
+                <tr class="danger scheme-error">
+                  <td colspan="4">
+                    <small>We couldn't retrieve your balance, your details may be incorrect. Try re-adding the account.</small>
+                  </td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p class="lead">
+          <a href="{{ url("accounts:link-scheme") }}">
+            Add a loyalty scheme to get started.
+          </a>
+        </p>
+      {% endif %}
+      <ul class="list-group">
+      </div>
+    </div>
+  </div>
+{% endblock %}
