@@ -1,4 +1,4 @@
-from django.messages import messages
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.crypto import get_random_string
 from django.views.generic import FormView, ListView, DeleteView
