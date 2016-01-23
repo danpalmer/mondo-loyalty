@@ -40,7 +40,6 @@ class LoginReceive(BaseFormView):
         return kwargs
 
     def form_invalid(self, form):
-        import ipdb; ipdb.set_trace()
         return redirect('home:view')
 
     def form_valid(self, form):
