@@ -49,3 +49,10 @@ footer {
 .scheme-error td {
   border-top: none !important;
 }
+
+.navbar-brand img {
+  max-width: 32px;
+  display: inline-block;
+  margin-right: 6px;
+  margin-top: -5px;
+}
