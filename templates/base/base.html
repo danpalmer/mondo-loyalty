@@ -11,8 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body class="{% block body_classes %}{% endblock %}">
-    {% block nav %}
-      {% include "base/_navigation.html" %}
+    {% block nav_notifications %}
+      {% block nav %}
+        {% include "base/_navigation.html" %}
+      {% endblock %}
+      {% block notifications %}
+        {% include "base/_notifications.html" %}
+      {% endblock %}
     {% endblock %}
     {% block body %}
       <div class="container navbar-offset">
