@@ -41,7 +41,7 @@ class LoginReceive(BaseFormView):
         return kwargs
 
     def form_invalid(self, form):
-        errors = [z for z in y for x, y in form.errors.items()]
+        errors = [z for x, y in form.errors.items() for z in y]
         for error in errors:
             messages.error(self.request, error)
         return redirect('home:view')
