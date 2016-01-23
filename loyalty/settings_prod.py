@@ -1,13 +1,16 @@
 import os
 import dj_database_url
 
-DEBUG = 'PRODUCTION' not in os.environ
+DEBUG = 'DEBUG' in os.environ
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-SITE_URL = 'http://mondo-loyalty.herokuapp.com'
+SITE_URL = os.environ.get(
+    'SITE_URL',
+    'http://mondo-loyalty.herokuapp.com',
+)
 
 ALLOWED_HOSTS = ('*',)
 

@@ -1,11 +1,12 @@
 import os
 
-DEBUG = 'PRODUCTION' not in os.environ
+PRODUCTION = 'PRODUCTION' in os.environ
+DEBUG = 'DEBUG' in os.environ
 
-if DEBUG:
-    from .settings_local import *
-else:
+if PRODUCTION:
     from .settings_prod import *
+else:
+    from .settings_local import *
 
 if not SECRET_KEY:
     raise ValueError("Refusing to start without a secret key")

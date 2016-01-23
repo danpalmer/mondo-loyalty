@@ -1,0 +1,37 @@
+db:
+  image: postgres
+rabbitmq:
+  image: rabbitmq
+web:
+  build: .
+  command: python manage.py runserver 0.0.0.0:8000
+  volumes:
+    - .:/code
+  ports:
+    - "8000:8000"
+  links:
+    - rabbitmq
+    - db
+    - celery
+  environment:
+    - DEBUG=DEBUG
+    - PRODUCTION=PRODUCTION
+    - SITE_URL=http://localhost:8080
+    - DATABASE_URL=postgres://postgres@db/postgres
+    - CLOUDAMQP_URL=amqp://guest:guest@rabbitmq//
+    - SECRET_KEY
+celery:
+  build: .
+  command: celery --without-gossip --without-mingle --without-heartbeat --app=loyalty worker -l info
+  volumes:
+    - .:/code
+  links:
+    - rabbitmq
+    - db
+  environment:
+    - DEBUG=DEBUG
+    - PRODUCTION=PRODUCTION
+    - SITE_URL=http://localhost:8080
+    - DATABASE_URL=postgres://postgres@db/postgres
+    - CLOUDAMQP_URL=amqp://guest:guest@rabbitmq//
+    - SECRET_KEY
