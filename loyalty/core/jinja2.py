@@ -1,6 +1,7 @@
 from django_enumfield.context_processors import get_enums
 
 from django.conf import settings
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.staticfiles.storage import staticfiles_storage
 
@@ -14,6 +15,7 @@ def environment(**options):
         'url': simple_reverse,
         'settings': settings,
         'enums': get_enums(),
+        'get_messages': messages.get_messages,
     })
     return env
 

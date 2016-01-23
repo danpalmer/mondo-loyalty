@@ -3,13 +3,19 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
-from .views import Login, Dashboard, LinkScheme, DeleteScheme
+from .views import LoginRedirect, LoginReceive, Dashboard, LinkScheme, \
+    DeleteScheme
 
 urlpatterns = [
     url(
         r'^login$',
-        Login.as_view(),
+        LoginRedirect.as_view(),
         name='login',
+    ),
+    url(
+        r'^login-receive$',
+        LoginReceive.as_view(),
+        name='login-receive',
     ),
 
     # Login Required

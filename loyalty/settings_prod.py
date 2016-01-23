@@ -90,6 +90,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 MONDO_CLIENT_ID = os.environ.get('MONDO_CLIENT_ID')
 MONDO_CLIENT_SECRET = os.environ.get('MONDO_CLIENT_SECRET')
 MONDO_API_BASE = os.environ.get('MONDO_API_BASE')
+MONDO_AUTH_URI = os.environ.get('MONDO_AUTH_URI')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

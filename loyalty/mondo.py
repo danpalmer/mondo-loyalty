@@ -2,6 +2,8 @@ import datetime
 import requests
 import strict_rfc3339
 
+from urllib.parse import urlencode
+
 from django.conf import settings
 
 
@@ -18,14 +20,33 @@ URL_TRANSACTION_FMT = url('transaction/%s')
 URL_FEED = url('feed')
 
 
-def login(username, password):
-    token_response = requests.post(URL_TOKEN, data=auth_payload({
-        'grant_type': 'password',
-        'username': username,
-        'password': password,
-    }))
+def auth_redirect(state, redirect_uri):
+    args = urlencode({
+        'redirect_uri': settings.SITE_URL + redirect_uri,
+        'client_id': settings.MONDO_CLIENT_ID,
+        'state': state,
+        'response_type': 'code',
+    })
 
-    return token_response.json()
+    return '{uri}?{args}'.format(
+        uri=settings.MONDO_AUTH_URI,
+        args=args,
+    )
+
+
+def exchange_code_for_token(code, redirect_uri):
+    response = requests.post(
+        URL_TOKEN,
+        data={
+            'grant_type': 'authorization_code',
+            'client_id': settings.MONDO_CLIENT_ID,
+            'client_secret': settings.MONDO_CLIENT_SECRET,
+            'redirect_uri': settings.SITE_URL + redirect_uri,
+            'code': code,
+        }
+    )
+
+    return response.json()
 
 
 def get_accounts(user):
