@@ -1,4 +1,4 @@
-Django==1.9b1
+Django==1.9
 git+https://github.com/danpalmer/django-enumfield.git
 psycopg2
 django-extensions
